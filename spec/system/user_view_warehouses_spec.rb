@@ -23,5 +23,21 @@ describe 'Usuário visualiza um galpão' do
         expect(page).to have_content('Área: 90000')
     end
 
+    it 'acessa o galpão e volta para o menu principal' do 
+        #Arrange
+        Warehouse.create(name: 'Aeroporto de SP', cod: 'GRU', city: 'São Paulo', area: 90_000,
+            address: 'Avenida do aeroporto, 498', cep: '84875-687',
+            description: 'Armazém destinado à mercadorias internacionais')
+
+        #Act
+        visit(root_path)
+        click_on('Aeroporto de SP')
+        click_on('Voltar')
+
+        #Assert
+        expect(current_path).to eq(root_path)
+
+    end
+
 
 end
