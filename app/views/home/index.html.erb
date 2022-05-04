@@ -1,18 +1,37 @@
-<h1> Galpões & Estoque </h1>
+
+
+<section id="warehouses">
+
+<h2> Galpões </h2>
 
 <% if @warehouses.any? %>
 
-    <% @warehouses.each do |w| %>
+    
+        <% @warehouses.each do |w| %>
+        <div>
 
-        Nome: <%= link_to(w.name, warehouse_path(w.id)) %>
-        Código: <%= w.cod %>
-        Cidade: <%= w.city %>
-        Área: <%= w.area %> m²
+            <dl>
+                <dt>Nome: </dt>
+                <dd> <%= link_to(w.name, warehouse_path(w.id)) %> </dd> <br>
 
-    <% end %>
+                <dt>Código: </dt>
+                <dd> <%= w.cod %> </dd> <br>
+
+                <dt>Cidade: </dt>
+                <dd> <%= w.city %> </dd> <br>
+
+                <dt>Área: </dt>
+                <dd> <%= w.area %> m²</dd> <br>
+
+            </dl>
+
+        </div>
+        <% end %>
 
 <% else %>
 
    <p> Não há galpões cadastrados </p>
    
 <% end %>
+
+</section>
