@@ -21,7 +21,7 @@ describe 'Usuário acessa o cadastro de galpões' do
         expect(page).to have_content('Descrição')
     end
 
-    it 'vê um botão de cadastro e cadastra o galpão com sucesso' do 
+    it 'vê um botão de cadastro e cadastra o galpão e visualiza uma mensagem de sucesso' do 
 
         #Arrange
 
@@ -39,6 +39,7 @@ describe 'Usuário acessa o cadastro de galpões' do
 
         #Assert
         expect(current_path).to eq(root_path)
+        expect(page).to have_content('Galpão cadastrado com sucesso')
         expect(page).to have_content('Aeroporto de RJ')
         expect(page).to have_content("RIO")
         expect(page).to have_content("Rio de Janeiro")

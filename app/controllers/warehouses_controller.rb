@@ -11,6 +11,6 @@ class WarehousesController < ApplicationController
     def create
         w = Warehouse.new(params.require(:warehouse).permit(:name, :city, :cod, :address, :description, :area, :cep))
         w.save
-        redirect_to(root_path)
+        redirect_to(root_path, notice: 'Galpão cadastrado com sucesso.')
     end
 end
