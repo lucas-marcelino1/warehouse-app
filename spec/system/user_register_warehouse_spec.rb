@@ -13,12 +13,12 @@ describe 'Usuário acessa o cadastro de galpões' do
         #Assert
         
         expect(page).to have_field('Nome')
-        expect(page).to have_content('Cidade')
-        expect(page).to have_content('Código')
-        expect(page).to have_content('Endereço')
-        expect(page).to have_content('CEP')
-        expect(page).to have_content('Área')
-        expect(page).to have_content('Descrição')
+        expect(page).to have_field('Cidade')
+        expect(page).to have_field('Código')
+        expect(page).to have_field('Endereço')
+        expect(page).to have_field('CEP')
+        expect(page).to have_field('Área')
+        expect(page).to have_field('Descrição')
     end
 
     it 'vê um botão de cadastro e cadastra o galpão e visualiza uma mensagem de sucesso' do 
