@@ -46,4 +46,20 @@ describe 'Usuário acessa o cadastro de galpões' do
         expect(page).to have_content("49000")
     end
 
+    it 'e tenta cadastrar um galpão com dados inválidos e visualiza uma mensagem de erro' do
+
+        #Arrange
+
+        #Act
+        visit(root_path)
+        click_on('Cadastrar galpão')
+        fill_in('Descrição', with: '')
+        fill_in('Nome', with: '')
+        click_on('Cadastrar galpão')
+
+        #Assert
+        expect(page).to have_content('Não foi possível cadastrar galpão.')
+
+    end
+
 end
