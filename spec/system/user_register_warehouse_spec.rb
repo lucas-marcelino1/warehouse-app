@@ -35,7 +35,7 @@ describe 'Usuário acessa o cadastro de galpões' do
         fill_in('Endereço', with: 'Avenida Depois de amanhã, 199')
         fill_in('CEP', with: '20894-640')
         fill_in('Área', with: '49000')
-        click_on('Cadastrar galpão')
+        click_on('Criar Galpão')
 
         #Assert
         expect(current_path).to eq(root_path)
@@ -55,10 +55,18 @@ describe 'Usuário acessa o cadastro de galpões' do
         click_on('Cadastrar galpão')
         fill_in('Descrição', with: '')
         fill_in('Nome', with: '')
-        click_on('Cadastrar galpão')
+        click_on('Criar Galpão')
 
         #Assert
         expect(page).to have_content('Não foi possível cadastrar galpão.')
+        expect(page).to have_content('Nome não pode ficar em branco.')
+        expect(page).to have_content('Código não pode ficar em branco.')
+        expect(page).to have_content('Cidade não pode ficar em branco.')
+        expect(page).to have_content('CEP não pode ficar em branco.')
+        expect(page).to have_content('Endereço não pode ficar em branco.')
+        expect(page).to have_content('Área não pode ficar em branco.')
+        expect(page).to have_content('Descrição não pode ficar em branco.')
+        
 
     end
 

@@ -1,45 +1,54 @@
 <h1>Cadastro de novo galpão </h1>
 
+<% if @warehouse.errors.any? %>
+        <p>Verifique os erros:</p>
+    <ul>
+        <% @warehouse.errors.full_messages.each do |msg|%>
+            <li> <%= msg %>. </li>
+        <% end %>
+    </ul>
+<% end %>
+
 <%= form_with(model: @warehouse) do |f| %>
+    
+    <div>
+        <%= f.label :description %>
+        <%= f.text_area :description %>
+    </div>
 
-<div>
-    <%= f.label :description, 'Descrição' %>
-    <%= f.text_area :description %>
-</div>
+    <div>
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+    </div>
 
-<div>
-    <%= f.label :name, 'Nome' %>
-    <%= f.text_field :name %>
-</div>
+    <div>
+        <%= f.label :city %>
+        <%= f.text_field :city %>
+    </div>
 
-<div>
-    <%= f.label :city, 'Cidade' %>
-    <%= f.text_field :city %>
-</div>
+    <div>
+        <%= f.label :cod %>
+        <%= f.text_field :cod %>
+    </div>
 
-<div>
-    <%= f.label :cod, 'Código' %>
-    <%= f.text_field :cod %>
-</div>
+    <div>
+        <%= f.label :address %>
+        <%= f.text_field :address %>
+    </div>
 
-<div>
-    <%= f.label :address, 'Endereço' %>
-    <%= f.text_field :address %>
-</div>
+    <div>
+        <%= f.label :cep %>
+        <%= f.text_field :cep %>
+    </div>
 
-<div>
-    <%= f.label :cep, 'CEP' %>
-    <%= f.text_field :cep %>
-</div>
+    <div>
+        <%= f.label :area %>
+        <%= f.number_field :area %>
+    </div>
 
-<div>
-    <%= f.label :area, 'Área' %>
-    <%= f.number_field :area %>
-</div>
-
-<div>
-    <%= f.submit 'Cadastrar galpão' %>
-</div>
+    <div>
+        <%= f.submit %>
+    </div>
 
 
 <% end %>
