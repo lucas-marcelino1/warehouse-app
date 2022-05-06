@@ -101,5 +101,44 @@ RSpec.describe Warehouse, type: :model do
             expect(result).to eq(false)
         end
 
+        it 'false when name is already in use' do
+            #Arrange
+            first_warehouse = Warehouse.create(name: 'Rio', cod: 'SDU', city: 'Rio de Janeiro', area: 50_000, cep: '20000-000',
+                                            address: 'Av do Porto do Rio', description: 'Galpão do Rio')
+
+            second_warehouse = Warehouse.create(name: 'Rio', cod: 'NTI', city: 'São Paulo', area: 60_000, cep: '68000-000',
+                                            address: 'Av Casa Branca', description: 'Galpão de Niterói')
+            #Act
+            result = second_warehouse.valid?
+
+            #Assert
+            expect(result).to eq(false)
+        end
+
+        it 'false when quantity numbers of letter in code not is 3' do
+            #Arrange
+            warehouse = Warehouse.create(name: 'Rio', cod: 'R', city: 'Rio de Janeiro', area: 50_000, cep: '20000-000',
+                                            address: 'Av do Porto do Rio', description: 'Galpão do Rio')
+
+            
+            #Act
+            result = warehouse.valid?
+
+            #Assert
+            expect(result).to eq(false)
+        end
+
+        it 'false when the format of zipcode not is XXXXX-XXX' do
+            #Arrange
+            warehouse = Warehouse.create(name: 'Rio', cod: 'RIO', city: 'Rio de Janeiro', area: 50_000, cep: '0-0',
+                                            address: 'Av do Porto do Rio', description: 'Galpão do Rio')
+
+            
+            #Act
+            result = warehouse.valid?
+
+            #Assert
+            expect(result).to eq(false)
+        end
     end
 end
