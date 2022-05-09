@@ -23,4 +23,10 @@
     </dl>
 </div>
 
-<%= link_to('Voltar', root_path) %>
+<div>
+    <%= button_to 'Remover galpão', warehouse_path(@warehouse.id), method: :delete %>
+</div>
+
+<div>
+    <%= link_to('Voltar', root_path) %>
+</div>
