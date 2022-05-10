@@ -1,0 +1,36 @@
+
+<section id="suppliers">
+
+<h2> Fornecedores </h2>
+
+<div>
+    <%= link_to('Cadastrar fornecedor', new_supplier_path)%>
+</div>
+
+
+<% if @suppliers.any? %>
+
+    
+        <% @suppliers.each do |s| %>
+        <div>
+
+            <dl>
+                <dt>Razão social: </dt>
+                <dd> <%= link_to(s.corporation_name, s) %> </dd> <br>
+                <dd> <%= s.city %>/<%= s.state %> </dd> <br>
+
+                <dt>E-mail: </dt>
+                <dd> <%= s.email %> </dd> <br>
+
+            </dl>
+
+        </div>
+        <% end %>
+
+<% else %>
+
+   <p> Não há fornecedores cadastrados! </p>
+   
+<% end %>
+
+</section>

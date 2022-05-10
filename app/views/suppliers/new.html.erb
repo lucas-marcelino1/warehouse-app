@@ -1,0 +1,26 @@
+<%= form_with model: @supplier do |f| %>
+
+    <%= f.label :corporation_name %>
+    <%= f.text_field :corporation_name %>
+
+    <%= f.label :brand_name %>
+    <%= f.text_field :brand_name %>
+
+    <%= f.label :registration_number %>
+    <%= f.text_field :registration_number %>
+
+    <%= f.label :address %>
+    <%= f.text_field :address %>
+
+    <%= f.label :city %>
+    <%= f.text_field :city %>
+
+    <%= f.label :state %>
+    <%= f.text_field :state %>
+
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+
+    <%= f.submit %>
+
+<% end %>
