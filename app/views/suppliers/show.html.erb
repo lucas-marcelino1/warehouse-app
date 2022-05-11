@@ -1,0 +1,28 @@
+<h1> Fornecedor <% @supplier.corporation_name %> </h1>
+
+<h3> <%= link_to 'Editar Fornecedor', edit_supplier_path(@supplier.id) %> 
+
+<div>
+    <dl>
+
+    <dt><strong>Razão Social: </strong></dt>
+    <dd> <%= @supplier.corporation_name %> </dd> <br>
+
+    <dt><strong>Nome Fantasia: </strong></dt>
+    <dd> <%= @supplier.brand_name %> </dd> <br>
+
+    <dt><strong>CNPJ: </strong></dt>
+    <dd> <%= @supplier.registration_number %> </dd> <br>
+
+    <dt><strong>Endereço: </strong></dt>
+    <dd> <%= @supplier.address %> </dd> <br>
+
+    <dt><strong>Cidade/UF: </strong></dt>
+    <dd> <%= @supplier.city %>/<%= @supplier.state %> </dd> <br>
+
+    <dt><strong>E-mail: </strong></dt>
+    <dd> <%= @supplier.email %> </dd> <br>
+    
+    </dl>
+</div>
+
