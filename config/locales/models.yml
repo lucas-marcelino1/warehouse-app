@@ -3,6 +3,7 @@ pt-BR:
     models:
       warehouse: 'Galpão'
       supplier: 'Fornecedor'
+      product_model: 'Modelo de Produto'
     attributes:
       warehouse:
         name: "Nome"
@@ -20,6 +21,14 @@ pt-BR:
         state: "Estado"
         email: "E-mail"
         registration_number: "CNPJ"
+      product_model:
+        name: 'Nome'
+        weight: 'Peso'
+        width: 'Largura'
+        height: 'Altura'
+        depth: 'Profundidade'
+        sku: 'Código'
+        
         
 
 

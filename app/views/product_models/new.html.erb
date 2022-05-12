@@ -1,0 +1,52 @@
+<% if @product_model.errors.any? %>
+        <p>Verifique os erros:</p>
+    <ul>
+        <% @product_model.errors.full_messages.each do |msg|%>
+            <li> <%= msg %>. </li>
+        <% end %>
+    </ul>
+<% end %>
+
+<%= form_with(model: @product_model) do |f| %>
+    
+    <div>
+        <%= f.label :name %>
+        <%= f.text_area :name %> <br>
+    </div>
+
+    <div>
+        <%= f.label :weight %>
+        <%= f.text_field :weight %> <br>
+    </div>
+
+    <div>
+        <%= f.label :width %>
+        <%= f.text_field :width %> <br>
+    </div>
+
+    <div>
+        <%= f.label :height %>
+        <%= f.text_field :height %> <br>
+    </div>
+
+    <div>
+        <%= f.label :depth %>
+        <%= f.text_field :depth %> <br>
+    </div>
+
+    <div>
+        <%= f.label :sku %>
+        <%= f.text_field :sku %> <br>
+    </div>
+
+    <div>
+        <%= f.label :supplier_id, 'Fornecedor' %>
+        <%= f.collection_select :supplier_id, Supplier.all, :id, :brand_name %> <br>
+    </div>
+
+    <div>
+        <%= f.submit %>
+    </div>
+
+
+<% end %>
