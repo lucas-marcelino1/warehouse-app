@@ -1,4 +1,6 @@
 class SuppliersController < ApplicationController
+    before_action :set_id, only: [:show, :edit, :update]
+    
 
     def index
         @suppliers = Supplier.all
@@ -6,20 +8,20 @@ class SuppliersController < ApplicationController
 
     def new
         @supplier = Supplier.new
+        
     end
 
     def show
-        @supplier = Supplier.find(params[:id])
+        
     end
 
     def edit
-        @supplier = Supplier.find(params[:id])
+        
     end
 
     def update
-        @supplier = Supplier.find(params[:id])
-        if @supplier.update(params.require(:supplier).permit(:corporation_name, :brand_name, :registration_number,
-            :city, :email, :state, :address))
+        
+        if @supplier.update(supplier_params)
             redirect_to(supplier_path(@supplier.id), notice: 'Fornecedor atualizado com sucesso')
         else
             flash.now[:notice] = 'Não foi possível atualizar o fornecedor'
@@ -28,8 +30,7 @@ class SuppliersController < ApplicationController
     end
 
     def create
-        @supplier = Supplier.new(params.require(:supplier).permit(:corporation_name, :brand_name, :registration_number,
-                      :city, :email, :state, :address))
+        @supplier = Supplier.new(supplier_params)
 
         if @supplier.save
             redirect_to(suppliers_path, notice: 'Fornecedor cadastrado com sucesso.')
@@ -37,5 +38,16 @@ class SuppliersController < ApplicationController
             flash.now[:notice] = 'Não foi possível cadastrar o fornecedor!'
             render :new
         end
+    end
+
+    private
+
+    def set_id
+        @supplier = Supplier.find(params[:id])
+    end
+
+    def supplier_params
+        params.require(:supplier).permit(:corporation_name, :brand_name, :registration_number,
+            :city, :email, :state, :address)
     end
 end

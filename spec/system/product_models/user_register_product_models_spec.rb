@@ -17,6 +17,8 @@ describe 'Usuário acessa tela de cadastro de produtos' do
 
         Supplier.create!(corporation_name: 'Samsung Brasil LTDA', brand_name: 'Samsung', registration_number: '12.345.678/1000-10',
             address: 'Rua Progresso, 2548', city: 'Blumenau', state: 'Santa Catarina', email: 'samsungbrasilcontato@gmail.com.br')
+        Supplier.create!(corporation_name: 'Inox do Brasil LTDA', brand_name: 'Inox', registration_number: '12.345.678/1220-10',
+                address: 'Rua Progresso, 8954', city: 'Blumenau', state: 'Santa Catarina', email: 'inoxbrasilcontato@gmail.com.br')
         visit(root_path)
         click_on('Modelos de Produtos')
         click_on('Cadastrar novo modelo de produto')

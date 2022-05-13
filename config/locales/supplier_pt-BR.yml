@@ -1,0 +1,18 @@
+pt-BR:
+  activerecord:
+    models:
+      supplier: 'Fornecedor'
+    attributes:
+      supplier:
+        corporation_name: "Razão Social"
+        brand_name: "Nome Fantasia"
+        address: "Endereço"
+        city: "Cidade"
+        state: "Estado"
+        email: "E-mail"
+        registration_number: "CNPJ"
+     
+        
+
+
+      # will translate User attribute "login" as "Handle"
