@@ -54,11 +54,12 @@ describe 'Usuário acessa tela de cadastro de produtos' do
         click_on('Criar Modelo de Produto')
 
         expect(page).to have_content('Não foi possível cadastrar o modelo de produto!')
-        expect(page).to have_content('Código é muito curto (mínimo: 20 caracteres)')
+        expect(page).to have_content('Código deve conter 20 caracteres')
         expect(page).to have_content('Largura deve ser maior que 0')
         expect(page).to have_content('Altura deve ser maior que 0')
         expect(page).to have_field('Nome', with: 'Tv de 42 polegadas')
         expect(page).to have_field('Peso', with: '1650')
+        expect(page).to have_select('Fornecedor', selected: 'Samsung')
         
 
     end

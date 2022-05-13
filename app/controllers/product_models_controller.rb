@@ -18,5 +18,11 @@ class ProductModelsController < ApplicationController
         end
     end
 
+    def show
+        @product_model = ProductModel.find(params[:id])
+    end
+
+    
+
    
 end

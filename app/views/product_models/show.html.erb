@@ -1,0 +1,31 @@
+
+<h1>Modelo de Produto: <%= @product_model.name %> </h1>
+
+
+
+<h3> <%= link_to 'Editar', edit_product_model_path(@product_model.id) %> 
+
+<div>
+    <dl>
+
+    <dt><strong>Nome: </strong></dt>
+    <dd> <%= @product_model.name %> </dd> <br>
+
+    <dt><strong>Peso: </strong></dt>
+    <dd> <%= @product_model.weight %>g </dd> <br>
+
+    <dt><strong>Código: </strong></dt>
+    <dd> <%= @product_model.sku %> </dd> <br>
+
+    <dt><strong>Dimensões: </strong></dt>
+    <dd> <%= @product_model.width %>cm x <%= @product_model.height %>cm x <%= @product_model.depth %>cm </dd> <br>
+
+    <dt><strong>Fornecedor: </strong></dt>
+    <dd> <%= @product_model.supplier.corporation_name %> </dd> <br>
+    
+    </dl>
+</div>
+
+<div>
+    <%= button_to 'Remover galpão', product_model_path(@product_model.id), method: :delete %>
+</div>

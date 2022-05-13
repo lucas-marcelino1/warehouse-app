@@ -14,7 +14,7 @@
 
             <dl>
                 <dt>Produto: </dt>
-                <dd> <%= p.name %> </dd> <br>
+                <dd> <%= link_to p.name, product_model_path(p.id) %> </dd> <br>
                 <dt>Código: </dt>
                 <dd> <%= p.sku %> </dd> <br>
                 <dd> <%= p.supplier.brand_name %> </dd> <br>
