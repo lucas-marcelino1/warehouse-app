@@ -4,11 +4,11 @@ require 'rails_helper'
 describe 'Usuário acessa edição de modelo de produto' do 
 
     it 'com sucesso' do
-
+        @user = User.create!(name: 'User', email: 'user@gmail.com', password: '123456')
         @supplier = Supplier.create!(corporation_name: 'Samsung Brasil LTDA', brand_name: 'Samsung', registration_number: '12.345.678/1000-10',
             address: 'Rua Progresso, 2548', city: 'Blumenau', state: 'Santa Catarina', email: 'samsungbrasilcontato@gmail.com.br')
         @product_model = ProductModel.create!(name: 'Fone sem fio', weight: 30, width: 3, height: 4, depth: 2, sku: 'FON19-SAMSU-XTZ14A89', supplier: @supplier)
-        
+        login_as(@user, :scope => :user)
         visit(root_path)
         within 'nav' do
         click_on('Modelos de Produtos')
@@ -23,11 +23,11 @@ describe 'Usuário acessa edição de modelo de produto' do
     end
 
     it 'e edita com sucesso' do
-
+        @user = User.create!(name: 'User', email: 'user@gmail.com', password: '123456')
         @supplier = Supplier.create!(corporation_name: 'Samsung Brasil LTDA', brand_name: 'Samsung', registration_number: '12.345.678/1000-10',
             address: 'Rua Progresso, 2548', city: 'Blumenau', state: 'Santa Catarina', email: 'samsungbrasilcontato@gmail.com.br')
         @product_model = ProductModel.create!(name: 'Fone sem fio', weight: 30, width: 3, height: 4, depth: 2, sku: 'FON19-SAMSU-XTZ14A89', supplier: @supplier)
-        
+        login_as(@user, :scope => :user)
         visit(root_path)
         within 'nav' do
         click_on('Modelos de Produtos')
@@ -46,10 +46,11 @@ describe 'Usuário acessa edição de modelo de produto' do
     end
 
     it 'e edita com campos inválidos' do
+        @user = User.create!(name: 'User', email: 'user@gmail.com', password: '123456')
         @supplier = Supplier.create!(corporation_name: 'Samsung Brasil LTDA', brand_name: 'Samsung', registration_number: '12.345.678/1000-10',
             address: 'Rua Progresso, 2548', city: 'Blumenau', state: 'Santa Catarina', email: 'samsungbrasilcontato@gmail.com.br')
         @product_model = ProductModel.create!(name: 'Fone sem fio', weight: 30, width: 3, height: 4, depth: 2, sku: 'FON19-SAMSU-XTZ14A89', supplier: @supplier)
-        
+        login_as(@user, :scope => :user)
         visit(root_path)
         within 'nav' do
         click_on('Modelos de Produtos')

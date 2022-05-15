@@ -4,7 +4,9 @@ require 'rails_helper'
 describe 'Usuário acessa tela de cadastro de produtos' do
     
     it 'a partir da tela inicial' do
+        @user = User.create!(name: 'User', email: 'user@gmail.com', password: '123456')
 
+        login_as(@user, :scope => :user)
         visit(root_path)
         click_on('Modelos de Produtos')
         click_on('Cadastrar novo modelo de produto')
@@ -14,11 +16,13 @@ describe 'Usuário acessa tela de cadastro de produtos' do
     end
 
     it 'e cadastra um modelo de produto' do
+        @user = User.create!(name: 'User', email: 'user@gmail.com', password: '123456')
 
         Supplier.create!(corporation_name: 'Samsung Brasil LTDA', brand_name: 'Samsung', registration_number: '12.345.678/1000-10',
             address: 'Rua Progresso, 2548', city: 'Blumenau', state: 'Santa Catarina', email: 'samsungbrasilcontato@gmail.com.br')
         Supplier.create!(corporation_name: 'Inox do Brasil LTDA', brand_name: 'Inox', registration_number: '12.345.678/1220-10',
                 address: 'Rua Progresso, 8954', city: 'Blumenau', state: 'Santa Catarina', email: 'inoxbrasilcontato@gmail.com.br')
+        login_as(@user, :scope => :user)
         visit(root_path)
         click_on('Modelos de Produtos')
         click_on('Cadastrar novo modelo de produto')
@@ -40,9 +44,10 @@ describe 'Usuário acessa tela de cadastro de produtos' do
     end
 
     it 'e tenta cadastrar modelo de produto com campos inválidos' do
-
+        @user = User.create!(name: 'User', email: 'user@gmail.com', password: '123456')
         Supplier.create!(corporation_name: 'Samsung Brasil LTDA', brand_name: 'Samsung', registration_number: '12.345.678/1000-10',
             address: 'Rua Progresso, 2548', city: 'Blumenau', state: 'Santa Catarina', email: 'samsungbrasilcontato@gmail.com.br')
+        login_as(@user, :scope => :user)
         visit(root_path)
         click_on('Modelos de Produtos')
         click_on('Cadastrar novo modelo de produto')
