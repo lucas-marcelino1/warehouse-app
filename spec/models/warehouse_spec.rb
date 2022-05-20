@@ -1,6 +1,25 @@
 require 'rails_helper'
 
 RSpec.describe Warehouse, type: :model do
+
+    describe '#full_description' do
+
+        it 'exibe nome e código lado a lado' do
+            w = Warehouse.new(name: 'Galpão Maringá', cod: 'MRA')
+
+            result = w.full_description
+
+            expect(result).to eq('Galpão Maringá | MRA')
+
+        end
+
+    end
+
+
+
+
+
+
     describe '#valid?' do
 
     context 'presence of attributes' do

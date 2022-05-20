@@ -11,23 +11,22 @@
 
   <body>
     <header>
-      <h1> Galpões & Estoque </h1>
-    </header>
-
-    <nav>
-      <%= link_to('Home', root_path) %> <br>
-      <%= link_to('Fornecedores', suppliers_path) %> <br>
-      <%= link_to('Modelos de Produtos', product_models_path) %> <br>
-      <%= link_to('Registrar pedido', new_order_path) %> <br>
-
-      <% if user_signed_in? %>
-        <%= current_user.email %>
-        <%= button_to('Sair', destroy_user_session_path, method: :delete) %> <br>
-      <% else %>
-         <%= link_to('Entrar', new_user_session_path) %> <br>
+      <%= link_to root_path do %>
+        <h1> Galpões & Estoque </h1>
       <% end %>
+      <nav>
+        <%= link_to('Fornecedores', suppliers_path) %> <br>
+        <%= link_to('Modelos de Produtos', product_models_path) %> <br>
+        <%= link_to('Registrar pedido', new_order_path) %> <br>
 
-    </nav>
+        <% if user_signed_in? %>
+          <%= current_user.description %>
+          <%= button_to('Sair', destroy_user_session_path, method: :delete) %> <br>
+        <% else %>
+           <%= link_to('Entrar', new_user_session_path) %> <br>
+        <% end %>
+      </nav>
+    </header>
 
     <main>
     

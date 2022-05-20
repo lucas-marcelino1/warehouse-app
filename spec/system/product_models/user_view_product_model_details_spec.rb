@@ -43,7 +43,7 @@ describe 'Usuário visualiza o modelo de produto' do
         visit(root_path)
         click_on('Modelos de Produtos')
         click_on('TV 32in')
-        click_on('Home')
+        click_on('Galpões & Estoque')
 
         expect(current_path).to eq(root_path)
        

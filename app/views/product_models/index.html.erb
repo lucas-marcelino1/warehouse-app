@@ -13,9 +13,9 @@
         <div>
 
             <dl>
-                <dt>Produto: </dt>
+                <dt><%=ProductModel.model_name.human%>: </dt>
                 <dd> <%= link_to p.name, product_model_path(p.id) %> </dd> <br>
-                <dt>Código: </dt>
+                <dt><%=ProductModel.model_name.human%>: </dt>
                 <dd> <%= p.sku %> </dd> <br>
                 <dd> <%= p.supplier.brand_name %> </dd> <br>
 

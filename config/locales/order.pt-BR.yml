@@ -5,7 +5,12 @@ pt-BR:
     attributes:
       order:
         supplier_id: 'Fornecedor'
+        supplier: 'Fornecedor'
         warehouse_id: 'Galpão'
-        estimated_delivery_date: 'Data Prevista'
+        warehouse: 'Galpão'
+        user_id: 'Responsável'
+        user: 'Responsável'
+        estimated_delivery_date: 'Data prevista de entrega'
+
         
         

@@ -30,7 +30,7 @@ describe 'Usuário vê detalhes do fornecedor' do
            click_on('Fornecedores') 
         end
         click_on('Inox Brasil LTDA')
-        click_on('Home')
+        click_on('Galpões & Estoque')
         expect(current_path).to eq(root_path)
 
     end

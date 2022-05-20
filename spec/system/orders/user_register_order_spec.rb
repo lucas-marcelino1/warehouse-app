@@ -16,15 +16,15 @@ describe 'Usuário registra pedido' do
     login_as(@user, :scope => :user)
     visit(root_path)
     click_on('Registrar pedido')
-    select @supplier.corporation_name, from: "Fornecedor"
-    select @warehouse.name, from: 'Galpão'
-    fill_in('Data Prevista', with: '29/05/2022')
+    select 'Samsung Brasil LTDA - Samsung | 12.345.678/1000-10', from: "Fornecedor"
+    select 'Rio | SDU', from: 'Galpão'
+    fill_in('Data prevista de entrega', with: '29/05/2022')
     click_on('Criar Pedido')
 
     expect(page).to have_content('Pedido realizado com sucesso!')
-    expect(page).to have_content('Galpão destino: Rio')
-    expect(page).to have_content('Fornecedor: Samsung Brasil LTDA.')
-    expect(page).to have_content('Responsável: User < user@gmail.com >')
+    expect(page).to have_content('Galpão destino: Rio | SDU')
+    expect(page).to have_content('Fornecedor: Samsung Brasil LTDA - Samsung | 12.345.678/1000-10.')
+    expect(page).to have_content('Responsável: User <user@gmail.com>')
     expect(page).to have_content('Data prevista de entrega: 29 de maio de 2022')
     expect(page).not_to have_content('Galpão destino: Aeroporto de SP')
     expect(page).not_to have_content('Fornecedor: Inox Brasil LTDA.')

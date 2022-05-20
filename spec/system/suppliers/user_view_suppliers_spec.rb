@@ -26,8 +26,8 @@ describe 'Usuário acessa os fornecedores' do
         visit(root_path)
         within 'nav' do
             click_on('Fornecedores')
-            click_on('Home')
         end
+        click_on('Galpões & Estoque')
         expect(current_path).to eq(root_path)
     end
 

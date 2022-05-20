@@ -10,4 +10,6 @@ pt-BR:
         height: 'Altura'
         depth: 'Profundidade'
         sku: 'Código'
+        supplier_id: 'Fornecedor'
+        supplier: 'Fornecedor'
         
