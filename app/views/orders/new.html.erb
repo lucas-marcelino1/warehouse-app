@@ -1,0 +1,23 @@
+<h1> Cadastro de pedido </h1>
+
+<%= form_with model: @order do |f| %>
+
+   <div>
+    <%= f.label :warehouse_id %>
+    <%= f.collection_select :warehouse_id, @warehouses, :id, :name %>
+  </div>
+
+  <div>
+    <%= f.label :supplier_id %>
+    <%= f.collection_select :supplier_id, @suppliers, :id, :corporation_name %>
+  </div>
+
+   <div>
+    <%= f.label :estimated_delivery_date %>
+    <%= f.text_field :estimated_delivery_date %>
+  </div>
+
+   <div>
+    <%= f.submit %>
+  </div>
+<% end %>
