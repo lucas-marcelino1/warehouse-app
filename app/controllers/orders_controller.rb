@@ -14,8 +14,10 @@ class OrdersController < ApplicationController
       flash[:notice] = 'Pedido realizado com sucesso!'
       redirect_to(@order) 
     else
-      flash.now[:notice] = "Não foi possível"
-      
+      @warehouses = Warehouse.order(:name)
+      @suppliers = Supplier.order(:name)
+      flash.now[:notice] = "Não foi possível cadastrar o pedido"
+      render 'new'
     end
   end
 

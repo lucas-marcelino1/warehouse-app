@@ -1,5 +1,13 @@
 <h1> Cadastro de pedido </h1>
 
+<% if @order.errors.any? %>
+  <ul>
+  <% @order.errors.full_messages.each do |m| %>
+    <li><%= m %></li>
+  <% end %>
+  </ul>
+<% end %>
+
 <%= form_with model: @order do |f| %>
 
    <div>
