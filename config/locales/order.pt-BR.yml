@@ -1,7 +1,9 @@
 pt-BR:
   activerecord:
     models:
-      order: 'Pedido'
+      order: 
+        one: Pedido
+        other: 'Pedidos'
     attributes:
       order:
         supplier_id: 'Fornecedor'

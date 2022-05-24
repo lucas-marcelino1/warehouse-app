@@ -11,3 +11,17 @@
     <dd><%=@order.supplier.corporation_name%></dd>
   </dl>
 <% end %>
+
+<% if @orders.any? %>
+ <p> <%=@orders.count%> <%=Order.model_name.human(count: @orders.count)%> <%= I18n.t(:found, count: @orders.count)%> </p>
+  <% @orders.each do |order| %>
+    <dl>
+    <dt><%= Order.human_attribute_name(:code) %>: </dt>
+    <dd><%=order.code%></dd>
+    <dt><%= Order.human_attribute_name(:warehouse) %> destino:</dt>
+    <dd><%=order.warehouse.full_description%></dd>
+    <dt><%= Order.human_attribute_name(:supplier) %>:</dt>
+    <dd><%=order.supplier.corporation_name%></dd>
+  </dl>
+  <% end%>
+<%end%>

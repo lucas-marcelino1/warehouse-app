@@ -45,12 +45,44 @@ describe 'Usuário pesquisa pedido' do
     end
 
     expect(page).to have_content("Resultados da busca por: #{@order.code}")
-    expect(page).to have_content('1 pedido encontrado')
+    expect(page).to have_content('1 Pedido Encontrado')
     expect(page).to have_content("Código: #{@order.code}")
     expect(page).to have_content('Galpão destino: Rio | SDU')
     expect(page).to have_content('Fornecedor: Samsung Brasil LTDA')
 
+  end
 
+  it 'e encontra vários pedidos' do
+    @user = User.create!(name: 'Lucas', email: 'lucas@gmail.com', password: '12345678')
+    @supplier = Supplier.create!(corporation_name: 'Samsung Brasil LTDA', brand_name: 'Samsung', registration_number: '12.345.678/1000-10',
+      address: 'Rua Progresso, 2548', city: 'Blumenau', state: 'Santa Catarina', email: 'samsungbrasilcontato@gmail.com.br')
+    Supplier.create!(corporation_name: 'Inox Brasil LTDA', brand_name: 'Inox', registration_number: '12.689.678/1000-10',
+        address: 'Rua João Pessoa, 337', city: 'Aracuari', state: 'Pará', email: 'inoxbrasilcontato@inox.com.br')
+    @warehouse = Warehouse.create!(name: 'Rio', cod: 'SDU', city: 'Rio de Janeiro', area: 50_000, cep: '20000-000', address: 'Av do Porto do Rio', description: 'Galpão do Rio')
+    @second_warehouse = Warehouse.create(name: 'Aeroporto de SP', cod: 'GRU', city: 'São Paulo', area: 90_000,
+          address: 'Avenida do aeroporto, 498', cep: '84875-687',
+          description: 'Armazém destinado à mercadorias internacionais')
+          
+    allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('SDU12329')      
+    @first_order = Order.create!(user: @user, warehouse: @warehouse, supplier: @supplier, estimated_delivery_date: 1.day.from_now)
+    allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('SDU35245')      
+    @second_order = Order.create!(user: @user, warehouse: @warehouse, supplier: @supplier, estimated_delivery_date: 1.day.from_now)
+    allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('GRU00000')      
+    @third_order = Order.create!(user: @user, warehouse: @second_warehouse, supplier: @supplier, estimated_delivery_date: 1.day.from_now)
+
+    login_as(@user, :scope => :user)
+    visit(root_path)
+
+    within 'header nav' do
+      fill_in('Procurar pedido', with: 'SDU')
+      click_on('Buscar')
+    end
+
+    expect(page).to have_content('2 Pedidos Encontrados')
+    expect(page).to have_content('SDU12329')
+    expect(page).to have_content('SDU35245')
+    expect(page).not_to have_content('GRU00000')
+    expect(page).not_to have_content('Aeroporto de SP')
 
   end
 end
