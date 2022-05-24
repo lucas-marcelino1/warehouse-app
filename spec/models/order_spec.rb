@@ -64,7 +64,7 @@ RSpec.describe Order, type: :model do
                             address: 'Rua Progresso, 2548', city: 'Blumenau', state: 'Santa Catarina', email: 'inoxbrasilcontato@inox.com.br')
       u = User.create!(email: 'lucas.marcelino@email.com', password: '123456', name: 'Lucas')
 
-      @order = Order.new(warehouse: ware, supplier: sup, user: u, estimated_delivery_date: '2022-10-01')
+      @order = Order.new(warehouse: ware, supplier: sup, user: u, estimated_delivery_date: 1.day.from_now)
       
       @order.save!
       result = @order.code
@@ -82,8 +82,8 @@ RSpec.describe Order, type: :model do
                             address: 'Rua Progresso, 2548', city: 'Blumenau', state: 'Santa Catarina', email: 'inoxbrasilcontato@inox.com.br')
       u = User.create!(email: 'lucas.marcelino@email.com', password: '123456', name: 'Lucas')
 
-      @first_order = Order.create!(warehouse: ware, supplier: sup, user: u, estimated_delivery_date: '2022-10-01')
-      @second_order = Order.new(warehouse: ware, supplier: sup, user: u, estimated_delivery_date: '2022-05-22')
+      @first_order = Order.create!(warehouse: ware, supplier: sup, user: u, estimated_delivery_date: 1.day.from_now)
+      @second_order = Order.new(warehouse: ware, supplier: sup, user: u, estimated_delivery_date: 1.day.from_now)
 
       @second_order.save!
 
