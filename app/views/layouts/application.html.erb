@@ -18,6 +18,8 @@
         <%= link_to('Fornecedores', suppliers_path) %> <br>
         <%= link_to('Modelos de Produtos', product_models_path) %> <br>
         <%= link_to('Registrar pedido', new_order_path) %> <br>
+        <%= link_to('Meus Pedidos', orders_path) %> <br>
+
         <% if user_signed_in? %>
           <%= current_user.description %>
           <%= form_with(url: search_orders_path, method: :get) do |f| %>
