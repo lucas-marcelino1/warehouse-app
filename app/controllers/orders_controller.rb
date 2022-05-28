@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_order_and_check_user, only: [:update, :edit, :show]
 
   def new
     @warehouses = Warehouse.order(:name)
@@ -22,7 +23,6 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find(params[:id])
   end
 
   def search
@@ -32,5 +32,28 @@ class OrdersController < ApplicationController
 
   def index
     @orders = current_user.orders
+  end
+
+  def edit
+    @warehouses = Warehouse.order(:name)
+    @suppliers = Supplier.order(:name)
+  end
+
+  def update
+    if @order.update(params.require(:order).permit(:estimated_delivery_date, :warehouse_id, :supplier_id))
+      return redirect_to(@order, notice: 'Pedido atualizado com sucesso.')
+    else
+      flash.now[:notice] = "Não foi possível atualizar o pedido."
+      render 'edit'
+    end
+  end
+
+  private
+  
+  def set_order_and_check_user
+    @order = Order.find(params[:id])
+    if @order.user != current_user
+      redirect_to(root_path, alert: 'Não foi possível realizar a ação!')
+    end
   end
 end
