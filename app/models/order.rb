@@ -5,6 +5,7 @@ class Order < ApplicationRecord
   validates :code, :estimated_delivery_date, presence: true
   before_validation :set_code
   validate :estimated_delivery_date_is_future
+  enum status: {pending: 0, delivered: 5, canceled: 10}
 
   private
 

@@ -20,7 +20,7 @@ describe 'Usuário registra pedido' do
     click_on('Registrar pedido')
     select 'Samsung Brasil LTDA - Samsung | 12.345.678/1000-10', from: "Fornecedor"
     select 'Rio | SDU', from: 'Galpão'
-    fill_in('Data prevista de entrega', with: '29/05/2022')
+    fill_in('Data prevista de entrega', with: 1.day.from_now)
     click_on('Criar Pedido')
 
     expect(page).to have_content("Pedido - ABC15864")
@@ -28,8 +28,9 @@ describe 'Usuário registra pedido' do
     expect(page).to have_content('Galpão destino: Rio | SDU')
     expect(page).to have_content('Fornecedor: Samsung Brasil LTDA - Samsung | 12.345.678/1000-10.')
     expect(page).to have_content('Responsável: User <user@gmail.com>')
-    expect(page).to have_content('Data prevista de entrega: 29 de maio de 2022')
-    expect(page).not_to have_content('Galpão destino: Aeroporto de SP')
+    expect(page).to have_content("Data prevista de entrega: #{I18n.l(1.day.from_now.to_date, format: :long)}")
+    expect(page).to have_content("Situação do pedido: Pendente")
+    expect(page).not_to have_content('Galpão destino: "Aeroporto de SP"')
     expect(page).not_to have_content('Fornecedor: Inox Brasil LTDA.')
   end
 

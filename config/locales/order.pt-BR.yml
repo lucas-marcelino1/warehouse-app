@@ -1,4 +1,7 @@
 pt-BR:
+  pending: 'Pendente'
+  canceled: 'Cancelado'
+  delivered: 'Entregue'
   activerecord:
     models:
       order: 
@@ -14,6 +17,7 @@ pt-BR:
         user: 'Responsável'
         estimated_delivery_date: 'Data prevista de entrega'
         code: 'Código'
-
+        status: 'Situação do pedido'
+        
         
         

@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_order_and_check_user, only: [:update, :edit, :show]
+  before_action :set_order_and_check_user, only: [:update, :edit, :show, :delivered, :canceled]
 
   def new
     @warehouses = Warehouse.order(:name)
@@ -46,6 +46,16 @@ class OrdersController < ApplicationController
       flash.now[:notice] = "Não foi possível atualizar o pedido."
       render 'edit'
     end
+  end
+
+  def delivered
+    @order.delivered!
+    redirect_to(@order, notice: 'Pedido marcado como entregue')
+  end
+
+  def canceled
+    @order.canceled!
+    redirect_to(@order, notice: 'Pedido marcado como cancelado')
   end
 
   private

@@ -3,16 +3,19 @@
   <dt><%= Order.human_attribute_name(:code) %>: </dt>
   <dd><%= link_to order.code, order %></dd>
 
-  </dt><%=Order.human_attribute_name(:warehouse_id)%> destino:</dt>
-  </dd> <%= order.warehouse.full_description %> </dd>
+  <dt><%=Order.human_attribute_name(:warehouse_id)%> destino:</dt> 
+  <dd> <%= order.warehouse.full_description %> </dd> 
 
-  </dt><%=Order.human_attribute_name(:supplier_id)%>:</dt>
-  </dd> <%= order.supplier.full_description %>. </dd>
+  <dt><%=Order.human_attribute_name(:supplier_id)%>:</dt>
+  <dd> <%= order.supplier.full_description %>. </dd> 
 
-  </dt><%=Order.human_attribute_name(:user_id)%>:</dt>
-  </dd> <%= order.user.description %> </dd>
+  <dt><%=Order.human_attribute_name(:user_id)%>:</dt>
+  <dd> <%= order.user.description %> </dd>
 
-  </dt><%=Order.human_attribute_name(:estimated_delivery_date)%>:</dt>
-  </dd> <%= I18n.localize(order.estimated_delivery_date, format: :long) %> </dd>
+  <dt><%=Order.human_attribute_name(:estimated_delivery_date)%>:</dt>
+  <dd> <%= I18n.localize(order.estimated_delivery_date, format: :long) %> </dd>
+
+  <dt><%=Order.human_attribute_name(:status)%>:</dt>
+  <dd> <%= I18n.t(order.status) %> 
  
 </dl>
