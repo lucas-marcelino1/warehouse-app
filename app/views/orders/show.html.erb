@@ -20,6 +20,12 @@
  
 </dl>
 
+<h2>Itens do pedido</h2>
+
+<% @order.order_items.each do |item| %>
+  <%= item.quantity %> itens do <%= item.product_model.name%>
+<% end %>
+
 <% if @order.pending?%>
   <%= button_to 'Marcar como ENTREGUE', delivered_order_path(@order)%>
   <%= button_to 'Marcar como CANCELADO', canceled_order_path(@order)%>
