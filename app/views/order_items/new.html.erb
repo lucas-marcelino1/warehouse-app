@@ -1,0 +1,12 @@
+<h1>Cadastrar item para o pedido <%= @order.code %> </h1>
+
+<%= form_with(model: [@order, @order_item]) do |f| %>
+  <%= f.label :product_model_id, 'Produto'%>
+  <%= f.collection_select :product_model_id, @product_models, :id, :name%>
+
+  <%= f.label :quantity,'Quantidade'%>
+  <%= f.number_field :quantity %>
+
+  <%= f.submit 'Gravar' %>
+
+<%end %>

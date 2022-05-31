@@ -22,6 +22,8 @@
 
 <h2>Itens do pedido</h2>
 
+<%= link_to 'Adicionar Item', new_order_order_item_path(@order.id) %>
+
 <% @order.order_items.each do |item| %>
   <%= item.quantity %> itens do <%= item.product_model.name%>
 <% end %>

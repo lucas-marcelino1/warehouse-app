@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_order_and_check_user, only: [:update, :edit, :show, :delivered, :canceled]
+  before_action :set_order_and_check_user, only: [:update, :edit, :show, :delivered, :canceled, :create_item]
 
   def new
     @warehouses = Warehouse.order(:name)
@@ -57,6 +57,7 @@ class OrdersController < ApplicationController
     @order.canceled!
     redirect_to(@order, notice: 'Pedido marcado como cancelado')
   end
+
 
   private
   
