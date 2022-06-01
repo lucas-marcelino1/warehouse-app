@@ -5,7 +5,7 @@ class Order < ApplicationRecord
   has_many :order_items
   has_many :product_models, through: :order_items
   validates :code, :estimated_delivery_date, presence: true
-  before_validation :set_code
+  before_validation :set_code, on: :create
   validate :estimated_delivery_date_is_future
   enum status: {pending: 0, delivered: 5, canceled: 10}
 

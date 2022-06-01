@@ -92,5 +92,22 @@ RSpec.describe Order, type: :model do
 
     end
 
+    it 'e o código permaneça igual' do
+      ware = Warehouse.create!(name: 'Aeroporto de SP', cod: 'GRU', city: 'São Paulo', area: 90_000,
+                            address: 'Avenida do aeroporto, 498', cep: '84875-687',
+                            description: 'Armazém destinado à mercadorias internacionais')
+      sup = Supplier.create!(corporation_name: 'Inox Brasil LTDA', brand_name: 'Inox', registration_number: '12.345.678/1000-10',
+                            address: 'Rua Progresso, 2548', city: 'Blumenau', state: 'Santa Catarina', email: 'inoxbrasilcontato@inox.com.br')
+      u = User.create!(email: 'lucas.marcelino@email.com', password: '123456', name: 'Lucas')
+
+      order = Order.create!(warehouse: ware, supplier: sup, user: u, estimated_delivery_date: 1.day.from_now)
+      original_code = order.code
+      
+      order.update!(estimated_delivery_date: 1.day.from_now)
+
+      expect(original_code).to eq(order.code)
+      
+    end
+
   end
 end
