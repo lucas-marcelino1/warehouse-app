@@ -3,6 +3,7 @@ class Warehouse < ApplicationRecord
 	validates :cod, :name, uniqueness: true
 	validates :cod, length: {is: 3}
 	validates :cep, format: {with: /\d{5}-\d{3}/}
+	has_many :stock_products
 
 	def full_description
 		"#{name} | #{cod}"

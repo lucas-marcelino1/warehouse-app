@@ -24,5 +24,12 @@
 </div>
 
 <div>
+    <p> Itens em Estoque </p>
+        <%@items.each_pair do |product_model, quantity| %>
+            <%= quantity %> unidades - <%= product_model.name %>/<%= product_model.sku %>
+        <% end %>
+</div>
+
+<div>
     <%= button_to 'Remover galpão', warehouse_path(@warehouse.id), method: :delete  %>
 </div>

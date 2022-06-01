@@ -2,6 +2,7 @@ class WarehousesController < ApplicationController
 	before_action :set_warehouse, only: [:show, :edit, :update, :destroy]
 
     def show
+			@items = @warehouse.stock_products.group(:product_model).count
     end
 
     def new
