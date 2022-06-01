@@ -97,8 +97,8 @@ describe 'Usuário visita seus próprios pedidos' do
     click_on("#{@order.code}")
 
     expect(page).to have_content('Itens do pedido')
-    expect(page).to have_content('23 itens do Produto A')
-    expect(page).to have_content('11 itens do Produto C')
+    expect(page).to have_content('23x - Produto A')
+    expect(page).to have_content('11x - Produto C')
 
 
 

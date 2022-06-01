@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Usuário atualiza pedido' do
 
-  it 'e não é o responsável' do
+  it 'para entregue e não é o responsável' do
     @user = User.create!(name: 'Lucas', email: 'lucas@gmail.com', password: '12345678')
     @second_user = User.create!(name: 'João Almdeida', email: 'joão@gmail.com', password: '12345678')
     @supplier = Supplier.create!(corporation_name: 'Samsung Brasil LTDA', brand_name: 'Samsung', registration_number: '12.345.678/1000-10',
@@ -17,7 +17,7 @@ describe 'Usuário atualiza pedido' do
     expect(response).to redirect_to(root_path)
   end
 
-  it 'e não é o responsável' do
+  it 'para cancelado e não é o responsável' do
     @user = User.create!(name: 'Lucas', email: 'lucas@gmail.com', password: '12345678')
     @second_user = User.create!(name: 'João Almdeida', email: 'joão@gmail.com', password: '12345678')
     @supplier = Supplier.create!(corporation_name: 'Samsung Brasil LTDA', brand_name: 'Samsung', registration_number: '12.345.678/1000-10',

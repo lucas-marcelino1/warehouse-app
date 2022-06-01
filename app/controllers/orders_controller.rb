@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_order_and_check_user, only: [:update, :edit, :show, :delivered, :canceled, :create_item]
+  before_action :set_order_and_check_user, only: [:update, :edit, :show, :delivered, :canceled]
 
   def new
     @warehouses = Warehouse.order(:name)
@@ -50,6 +50,11 @@ class OrdersController < ApplicationController
 
   def delivered
     @order.delivered!
+    @order.order_items.each do |item|
+      item.quantity.times do 
+        @stock = StockProduct.create!(warehouse: @order.warehouse, product_model: item.product_model, order: @order)
+      end
+    end
     redirect_to(@order, notice: 'Pedido marcado como entregue')
   end
 

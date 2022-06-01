@@ -15,9 +15,10 @@
             <dl>
                 <dt><%=ProductModel.model_name.human%>: </dt>
                 <dd> <%= link_to p.name, product_model_path(p.id) %> </dd> <br>
-                <dt><%=ProductModel.model_name.human%>: </dt>
+                <dt><%=ProductModel.human_attribute_name(:sku)%>: </dt>
                 <dd> <%= p.sku %> </dd> <br>
-                <dd> <%= p.supplier.brand_name %> </dd> <br>
+                 <dt><%=ProductModel.human_attribute_name(:supplier)%>: </dt>
+                <dd> <%= p.supplier.brand_name %> </dd> <br> <br>
 
             </dl>
 

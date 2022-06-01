@@ -22,7 +22,7 @@ describe 'Usuário adiciona item ao pedido' do
 
     expect(current_path).to eq(order_path(@order))
     expect(page).to have_content('Item adicionado com sucesso')
-    expect(page).to have_content('8 itens do Produto A')
+    expect(page).to have_content('8x - Produto A')
   end
 
   it 'e não vê produtos de outros fornecedores' do

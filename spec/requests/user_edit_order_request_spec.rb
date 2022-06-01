@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Usuário atualiza pedido' do
+describe 'Usuário edita o pedido' do
 
   it 'e não é o responsável' do
     @user = User.create!(name: 'Lucas', email: 'lucas@gmail.com', password: '12345678')
