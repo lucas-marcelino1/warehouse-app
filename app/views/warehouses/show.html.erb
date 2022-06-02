@@ -25,9 +25,11 @@
 
 <div>
     <p> Itens em Estoque </p>
+    <ul>
         <%@items.each_pair do |product_model, quantity| %>
-            <%= quantity %> unidades - <%= product_model.name %>/<%= product_model.sku %>
+            <li><%= quantity %> unidades - <%= product_model.name %>/<%= product_model.sku %> </li>
         <% end %>
+    </ul>
 </div>
 
 <div>

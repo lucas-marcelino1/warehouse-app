@@ -3,38 +3,42 @@
   <dt><%= Order.human_attribute_name(:code) %>: </dt>
   <dd><%= link_to @order.code, @order %></dd>
 
-  </dt><%=Order.human_attribute_name(:warehouse_id)%> destino:</dt>
-  </dd> <%= @order.warehouse.full_description %> </dd>
+  <dt><%=Order.human_attribute_name(:warehouse_id)%> destino:</dt>
+  <dd> <%= @order.warehouse.full_description %> </dd>
 
-  </dt><%=Order.human_attribute_name(:supplier_id)%>:</dt>
-  </dd> <%= @order.supplier.full_description %>. </dd>
+  <dt><%=Order.human_attribute_name(:supplier_id)%>:</dt>
+  <dd> <%= @order.supplier.full_description %>. </dd>
 
-  </dt><%=Order.human_attribute_name(:user_id)%>:</dt>
-  </dd> <%= @order.user.description %> </dd>
+  <dt><%=Order.human_attribute_name(:user_id)%>:</dt>
+  <dd> <%= @order.user.description %> </dd>
 
-  </dt><%=Order.human_attribute_name(:estimated_delivery_date)%>:</dt>
-  </dd> <%= I18n.localize(@order.estimated_delivery_date, format: :long) %> </dd>
+  <dt><%=Order.human_attribute_name(:estimated_delivery_date)%>:</dt>
+  <dd> <%= I18n.localize(@order.estimated_delivery_date, format: :long) %> </dd>
 
-  </dt><%=Order.human_attribute_name(:status)%>:</dt>
-  </dd> <%= I18n.t(@order.status) %> </dd>
+  <dt><%=Order.human_attribute_name(:status)%>:</dt>
+  <dd> <%= I18n.t(@order.status) %> </dd>
  
 </dl>
 
 <h2>Itens do pedido</h2>
+<%= link_to 'Adicionar Item', new_order_order_item_path(@order.id) %> 
+<div>
+  <ul>
+  <% @order.order_items.each do |item| %>
+    <li><%= item.quantity %>x - <%= item.product_model.name%></li>
+  <% end %>
+  </ul>
+</div>
 
-<%= link_to 'Adicionar Item', new_order_order_item_path(@order.id) %>
-
-<% @order.order_items.each do |item| %>
-  <%= item.quantity %>x - <%= item.product_model.name%>
-<% end %>
-
-<% if @order.pending?%>
-  <%= button_to 'Marcar como ENTREGUE', delivered_order_path(@order)%>
-  <%= button_to 'Marcar como CANCELADO', canceled_order_path(@order)%>
-<% elsif @order.canceled? %>
-  <%= button_to 'Marcar como ENTREGUE', delivered_order_path(@order)%>
-<% elsif @order.delivered? %>
-  <%= button_to 'Marcar como CANCELADO', canceled_order_path(@order)%>
-<%end%>
+<div>
+  <% if @order.pending?%>
+    <%= button_to 'Marcar como ENTREGUE', delivered_order_path(@order)%>
+    <%= button_to 'Marcar como CANCELADO', canceled_order_path(@order)%>
+  <% elsif @order.canceled? %>
+    <%= button_to 'Marcar como ENTREGUE', delivered_order_path(@order)%>
+  <% elsif @order.delivered? %>
+    <%= button_to 'Marcar como CANCELADO', canceled_order_path(@order)%>
+  <%end%>
+</div>
 
 <%= link_to 'Editar', edit_order_path(@order.id)%>
