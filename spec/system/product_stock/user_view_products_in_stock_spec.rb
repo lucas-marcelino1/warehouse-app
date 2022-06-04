@@ -18,11 +18,36 @@ describe 'Usuário visualiza os produtos' do
     visit(root_path)
     click_on('Rio')
   
+    within('section#stock_products') do
+      expect(page).to have_content('Itens em Estoque')
+      expect(page).to have_content('11 unidades - Televisão XTO/PRODA-SAMSU-XPTZXO90')
+      expect(page).to have_content('6 unidades - Dinamic Audio 7.1/DINAM-SAMSU-HHYZXO71')
+      expect(page).not_to have_content('Celular Samsung')
+    end
 
-    expect(page).to have_content('Itens em Estoque')
-    expect(page).to have_content('11 unidades - Televisão XTO/PRODA-SAMSU-XPTZXO90')
-    expect(page).to have_content('6 unidades - Dinamic Audio 7.1/DINAM-SAMSU-HHYZXO71')
-    expect(page).not_to have_content('Celular Samsung')
+  end
+
+  it 'e dá baixa em um item' do
+    @user = User.new(name:'João', email: 'joão@gmail.com', password: '123456')
+    @supplier = Supplier.create!(corporation_name: 'Samsung Brasil LTDA', brand_name: 'Samsung', registration_number: '12.345.678/1000-10',
+      address: 'Rua Progresso, 2548', city: 'Blumenau', state: 'Santa Catarina', email: 'samsungbrasilcontato@gmail.com.br')
+    product_A = ProductModel.create!(name: 'Televisão XTO', weight: 2000, width: 70, height: 45, depth: 10, sku:'PRODA-SAMSU-XPTZXO90', supplier: @supplier)
+    @warehouse = Warehouse.create!(name: 'Rio', cod: 'SDU', city: 'Rio de Janeiro', area: 50_000, cep: '20000-000', address: 'Av do Porto do Rio', description: 'Galpão do Rio')
+    @order = Order.create!(user: @user, warehouse: @warehouse, supplier: @supplier, estimated_delivery_date: 1.day.from_now)
+    2.times do StockProduct.create!(warehouse: @warehouse, order: @order, product_model: product_A) end
+
+    login_as(@user, :scope => :user)
+    visit(root_path)
+    click_on('Rio')
+    select('PRODA-SAMSU-XPTZXO90', from: 'Item para despachar')
+    fill_in('Destinatário', with: 'Luize')
+    fill_in('Endereço', with: 'Rua Campinas, 154')
+    click_on('Confirmar retirada')
+
+    expect(current_path).to eq(warehouse_path(@warehouse))
+    expect(page).to have_content('Item despachado com sucesso!')
+    expect(page).to have_content('1 unidades - Televisão XTO/PRODA-SAMSU-XPTZXO90')
+
 
   end
 

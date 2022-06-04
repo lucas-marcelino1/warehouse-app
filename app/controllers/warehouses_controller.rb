@@ -2,7 +2,12 @@ class WarehousesController < ApplicationController
 	before_action :set_warehouse, only: [:show, :edit, :update, :destroy]
 
     def show
-			@items = @warehouse.stock_products.group(:product_model).count
+			# @items = @warehouse.stock_products.group(:product_model).count -- Procura os stock products e agrupa por product model e conta
+			@items = @warehouse.stock_products.where.missing(:stock_product_destination).group(:product_model).count # procura onde a associação não existe
+			@product_models = []
+			@items.each do |stock_product_model|
+				@product_models << stock_product_model.first
+			end
     end
 
     def new
