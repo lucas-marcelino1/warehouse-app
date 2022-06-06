@@ -62,5 +62,69 @@ describe 'Warehouse API' do
       expect(json_response).to eq []
     end
 
+    it 'fail if there is an internal error' do
+      
+      allow(Warehouse).to receive(:all).and_raise(ActiveRecord::QueryCanceled) ## Funciona para o rescue_from pois QueryCancelede herda de ActiveRecordError
+      Warehouse.create!(name: 'Rio', cod: 'SDU', city: 'Rio de Janeiro', area: 50_000, cep: '20000-000', address: 'Av do Porto do Rio', description: 'Galpão do Rio')
+      Warehouse.create!(name: 'Maceio', cod: 'MCZ', city: 'Maceió', area: 60_000, cep: '45000-200', address: 'Av Maceió', description: 'Galpão de Maceió')
+
+      get("/api/v1/warehouses")
+
+      expect(response.status).to eq(500)
+    end
+
   end
+
+  context 'POST /api/v1/warehouses' do
+
+    it 'success' do
+
+      #payload são as informações enviadas para postar no servidor
+      post('/api/v1/warehouses', params: {warehouse: {name: 'Galpão Joinville', cod: 'JVE', city: 'Joinville', area: 90_000, cep: '89026-500', address: 'Rua Bernardino - 540', description: 'Galpão de SC na cidade de Joinville'}})
+
+      expect(response).to have_http_status(:created)
+      expect(response.content_type).to include('application/json')
+      json_response = JSON.parse(response.body)
+      expect(json_response["name"]).to eq('Galpão Joinville')
+      expect(json_response["cod"]).to eq('JVE')
+      expect(json_response["city"]).to eq('Joinville')
+      expect(json_response["area"]).to eq(90000)
+      expect(json_response["cep"]).to eq('89026-500')
+      expect(json_response["address"]).to eq('Rua Bernardino - 540')
+      expect(json_response["description"]).to eq('Galpão de SC na cidade de Joinville')
+
+    end
+
+    it 'fail if parameters are not complete' do
+    
+      post('/api/v1/warehouses', params: {warehouse: {name: 'Galpão Joinville', cod: 'JVE'}})
+
+      expect(response.status).to eq(412)
+      expect(response.body).not_to include('Nome não pode ficar em branco')
+      expect(response.body).not_to include('Código não pode ficar em branco')
+      expect(response.body).to include('Área não pode ficar em branco')
+      expect(response.body).to include('Cidade não pode ficar em branco')
+      expect(response.body).to include('Endereço não pode ficar em branco')
+      expect(response.body).to include('CEP não pode ficar em branco')
+      expect(response.body).to include('CEP não é válido')
+      expect(response.body).to include('Descrição não pode ficar em branco')
+
+
+    end
+
+    it 'fail if there is an internal error' do
+      #fazer um mock, interferir na execução do código utilizando métodos do Rspec para disparar um erro
+      #Gera o erro na hora do Warehouse.new(params)
+      allow(Warehouse).to receive(:new).and_raise(ActiveRecord::ActiveRecordError)
+      
+      warehouse_params = {warehouse: {name: 'Galpão Joinville', cod: 'JVE', city: 'Joinville', area: 90_000, cep: '89026-500', address: 'Rua Bernardino - 540', description: 'Galpão de SC na cidade de Joinville'}}
+
+      post('/api/v1/warehouses', params: warehouse_params)
+
+      expect(response.status).to eq(500)
+    end
+
+  end
+
+
 end
