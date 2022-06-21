@@ -6,32 +6,44 @@
 <div>
     <%= link_to('Cadastrar galpão', new_warehouse_path)%>
 </div>
+<br>
 
+<div>
+    <%= form_with(url: root_path, method: :get) do |f| %>
+      <%= f.label :name, 'Nome' %>
+      <%= f.text_field :name %>
 
+      <%= f.label :cod, 'Código' %>
+      <%= f.text_field :cod %>
+
+      <%= f.label :city, 'Cidade' %>
+      <%= f.text_field :city %>
+
+      <%= f.submit "Filtrar galpão" %> 
+    <% end %>
+</div>
+
+<br>
 <% if @warehouses.any? %>
 
-    
+    <table>
+        <tr>
+            <th>Nome:</th>
+            <th>Código:</th>
+            <th>Cidade:</th>
+            <th>Área:</th>
+        </tr>
         <% @warehouses.each do |w| %>
         <div>
-
-            <dl>
-                <dt>Nome: </dt>
-                <dd> <%= link_to(w.name, warehouse_path(w.id)) %> </dd> <br>
-
-                <dt>Código: </dt>
-                <dd> <%= w.cod %> </dd> <br>
-
-                <dt>Cidade: </dt>
-                <dd> <%= w.city %> </dd> <br>
-
-                <dt>Área: </dt>
-                <dd> <%= w.area %> m²</dd> <br>
-
-            </dl>
-
+            <tr>
+                <td><%= link_to(w.name, warehouse_path(w.id)) %></td>
+                <td><%= w.cod %></td>
+                <td><%= w.city %></td>
+                <td><%= w.area %> m²</td>
+            </tr>
         </div>
         <% end %>
-
+    </table>
 <% else %>
 
    <p> Não há galpões cadastrados </p>

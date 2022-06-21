@@ -25,9 +25,6 @@ describe 'Usuário atualiza o status do pedido' do
     estoque = StockProduct.where(product_model: @product_model, order: @order).count
     expect(estoque).to eq 5
 
-
-  
-
   end
 
   it 'para cancelado' do

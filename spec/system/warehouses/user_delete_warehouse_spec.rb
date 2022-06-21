@@ -16,9 +16,9 @@ describe 'Usuário deleta um galpão' do
         #Assert
         expect(current_path).to eq(root_path)
         expect(page).to have_content('Galpão removido com sucesso')
-        expect(page).not_to have_content('Nome: Maceio')
-        expect(page).not_to have_content('Código: MCZ')
-        expect(page).not_to have_content('Cidade: Maceió')
+        expect(page).not_to have_content('Maceio')
+        expect(page).not_to have_content('MCZ')
+        expect(page).not_to have_content('Maceió')
 
     end
 
@@ -37,11 +37,11 @@ describe 'Usuário deleta um galpão' do
         #Assert
         expect(current_path).to eq(root_path)
         expect(page).to have_content('Galpão removido com sucesso')
-        expect(page).not_to have_content('Nome: Maceio')
-        expect(page).not_to have_content('Código: MCZ')
-        expect(page).not_to have_content('Cidade: Maceió')
-        expect(page).to have_content('Nome: Rio')
-        expect(page).to have_content('Código: SDU')
-        expect(page).to have_content('Cidade: Rio de Janeiro')
+        expect(page).not_to have_content('Maceio')
+        expect(page).not_to have_content('MCZ')
+        expect(page).not_to have_content('Maceió')
+        expect(page).to have_content('Rio')
+        expect(page).to have_content('SDU')
+        expect(page).to have_content('Rio de Janeiro')
     end
 end

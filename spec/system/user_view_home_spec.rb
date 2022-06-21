@@ -23,15 +23,15 @@ describe 'Usuário acessa a tela inicial' do
 
         #Assert
         expect(page).not_to have_content("Não há galpões cadastrados")
-        expect(page).to have_content("Nome: Rio")
-        expect(page).to have_content("Código: SDU")
-        expect(page).to have_content("Cidade: Rio de Janeiro")
-        expect(page).to have_content("Área: 50000 m²")
+        expect(page).to have_content("Rio")
+        expect(page).to have_content("SDU")
+        expect(page).to have_content("Rio de Janeiro")
+        expect(page).to have_content("50000 m²")
         
-        expect(page).to have_content("Nome: Maceio")
-        expect(page).to have_content("Código: MCZ")
-        expect(page).to have_content("Cidade: Maceió")
-        expect(page).to have_content("Área: 60000 m²")
+        expect(page).to have_content("Maceio")
+        expect(page).to have_content("MCZ")
+        expect(page).to have_content("Maceió")
+        expect(page).to have_content("60000 m²")
     end
 
     it 'e não existem galpões cadastrados' do 
@@ -44,6 +44,21 @@ describe 'Usuário acessa a tela inicial' do
         #Assert
         expect(page).to have_content("Não há galpões cadastrados")
 
+    end
+
+    it 'e busca um galpão pelo nome, código e cidade na tela inicial' do
+        Warehouse.create!(name: 'Rio', cod: 'SDU', city: 'Rio de Janeiro', area: 50_000, cep: '20000-000', address: 'Av do Porto do Rio', description: 'Galpão do Rio')
+
+        visit(root_path)
+        fill_in('Nome', with: 'Rio')
+        fill_in('Código', with: 'SDU')
+        fill_in('Cidade', with: 'Rio de Janeiro')
+        click_on('Filtrar galpão')
+
+        expect(page).to have_content('Rio')
+        expect(page).to have_content('SDU')
+        expect(page).to have_content("Rio de Janeiro")
+        expect(page).to have_content("50000 m²")
     end
 
 
